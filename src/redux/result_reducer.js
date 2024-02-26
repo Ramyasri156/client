@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
-import data from "../database/data";
 
 export const resultReducer = createSlice({
     name: 'result',
     initialState : {
         userId : null,
-        result : data
+        result : []
     },
     reducers : {
         setUserId : (state, action) => {

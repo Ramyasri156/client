@@ -4,7 +4,6 @@ import { getServerData } from "../helper/helper";
 
 /** redux actions */
 import * as Action from '../redux/question_reducer'
-import data from "../database/data";
 
 /** fetch question hook to fetch api data and set value to store */
 export const useFetchQestion = () => {
@@ -17,7 +16,6 @@ export const useFetchQestion = () => {
         /** async function fetch backend data */
         (async () => {
             try {
-                console.log(process.env.REACT_APP_SERVER_HOSTNAME);
                 const [{ questions, answers }] = await getServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/questions`, (data) => data)
                 
                 if(questions.length > 0){
@@ -31,10 +29,8 @@ export const useFetchQestion = () => {
                     throw new Error("No Question Avalibale");
                 }
             } catch (error) {
-                
                 setGetData(prev => ({...prev, isLoading : false}));
                 setGetData(prev => ({...prev, serverError : error}));
-                //setGetData(prev => ({...prev, apiData : data}));
             }
         })();
     }, [dispatch]);
@@ -60,4 +56,3 @@ export const MovePrevQuestion = () => async (dispatch) => {
         console.log(error)
     }
 }
-
